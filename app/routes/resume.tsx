@@ -1,6 +1,6 @@
-import {Link, useNavigate, useParams} from "react-router";
-import {useEffect, useState} from "react";
-import {usePuterStore} from "~/lib/puter";
+import { Link, useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
+import { usePuterStore } from "~/lib/puter";
 import Summary from "~/components/Summary";
 import ATS from "~/components/ATS";
 import Details from "~/components/Details";
@@ -19,31 +19,31 @@ const Resume = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!isLoading && !auth.isAuthenticated) navigate(`/auth?next=/resume/${id}`);
+        if (!isLoading && !auth.isAuthenticated) navigate(`/auth?next=/resume/${id}`);
     }, [isLoading])
 
     useEffect(() => {
         const loadResume = async () => {
             const resume = await kv.get(`resume:${id}`);
 
-            if(!resume) return;
+            if (!resume) return;
 
             const data = JSON.parse(resume);
 
             const resumeBlob = await fs.read(data.resumePath);
-            if(!resumeBlob) return;
+            if (!resumeBlob) return;
 
             const pdfBlob = new Blob([resumeBlob], { type: 'application/pdf' });
             const resumeUrl = URL.createObjectURL(pdfBlob);
             setResumeUrl(resumeUrl);
 
             const imageBlob = await fs.read(data.imagePath);
-            if(!imageBlob) return;
+            if (!imageBlob) return;
             const imageUrl = URL.createObjectURL(imageBlob);
             setImageUrl(imageUrl);
 
             setFeedback(data.feedback);
-            console.log({resumeUrl, imageUrl, feedback: data.feedback });
+            console.log({ resumeUrl, imageUrl, feedback: data.feedback });
         }
 
         loadResume();
@@ -78,6 +78,30 @@ const Resume = () => {
                             <Summary feedback={feedback} />
                             <ATS score={feedback.ATS.score || 0} suggestions={feedback.ATS.tips || []} />
                             <Details feedback={feedback} />
+                            <div className="flex flex-wrap justify-center gap-3 mt-4">
+                                <Link
+                                    to={`/enhance/${id}`}
+                                    className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                                >
+                                    <span>Enhance Your Resume</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="m12 5 7 7-7 7"></path>
+                                    </svg>
+                                </Link>
+                                <Link
+                                    to={`/tailor?resume=${id}`}
+                                    className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2"
+                                >
+                                    <span>✨ Tailor for Job</span>
+                                </Link>
+                                <Link
+                                    to={`/chat-enhance/${id}`}
+                                    className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
+                                >
+                                    <span>💬 Chat to Refine</span>
+                                </Link>
+                            </div>
                         </div>
                     ) : (
                         <img src="/images/resume-scan-2.gif" className="w-full" />
