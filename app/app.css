@@ -51,86 +51,157 @@ form {
   @apply flex flex-col items-start gap-8 w-full;
 }
 
-@layer components {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
-  }
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+}
 
-  .gradient-border {
-    @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
-  }
+.gradient-border {
+  @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
+}
 
-  .primary-button {
-    @apply primary-gradient text-white rounded-full px-8 py-3 cursor-pointer w-full font-semibold transition-all duration-300 hover:primary-gradient-hover hover:scale-[1.02] active:scale-[0.98] shadow-md hover:shadow-lg flex items-center justify-center gap-2;
-  }
+.primary-button {
+  background: linear-gradient(135deg, #8e98ff 0%, #606beb 100%);
+  box-shadow: 0 4px 15px rgba(96, 107, 235, 0.3);
+  color: white;
+  border-radius: 9999px;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  transition: all 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
 
-  .primary-button-lg {
-    @apply primary-gradient text-white rounded-full px-12 py-5 cursor-pointer w-full font-bold text-xl transition-all duration-300 hover:primary-gradient-hover hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl flex items-center justify-center gap-2;
-  }
+.primary-button:hover {
+  background: linear-gradient(to bottom, #717dff, #4957eb);
+  transform: scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(96, 107, 235, 0.4);
+}
 
-  .resume-nav {
-    @apply flex flex-row justify-between items-center p-4 border-b border-gray-200;
-  }
+.primary-button:active {
+  transform: scale(0.98);
+}
 
-  .resume-summary {
-    @apply flex flex-row items-center justify-center p-4 gap-4;
+.primary-button-lg {
+  background: linear-gradient(135deg, #8e98ff 0%, #606beb 100%);
+  box-shadow: 0 4px 15px rgba(96, 107, 235, 0.3);
+  color: white;
+  border-radius: 9999px;
+  padding: 1.25rem 3rem;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: all 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
 
-    .category {
-      @apply flex flex-row gap-2 items-center bg-gray-50 rounded-2xl p-4 w-full justify-between;
-    }
-  }
+.primary-button-lg:hover {
+  background: linear-gradient(to bottom, #717dff, #4957eb);
+  transform: scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(96, 107, 235, 0.4);
+}
 
-  .back-button {
-    @apply flex flex-row items-center gap-2 border border-gray-200 rounded-lg p-2 shadow-sm;
-  }
+.primary-button-lg:active {
+  transform: scale(0.98);
+}
 
+.resume-nav {
+  @apply flex flex-row justify-between items-center p-4 border-b border-gray-200;
+}
+
+.resume-summary {
+  @apply flex flex-row items-center justify-center p-4 gap-4;
+}
+
+.resume-summary .category {
+  @apply flex flex-row gap-2 items-center bg-gray-50 rounded-2xl p-4 w-full justify-between;
+}
+
+.back-button {
+  @apply flex flex-row items-center gap-2 border border-gray-200 rounded-lg p-2 shadow-sm;
+}
+
+.auth-button {
+  background: linear-gradient(135deg, #8e98ff 0%, #606beb 100%);
+  box-shadow: 0 4px 15px rgba(96, 107, 235, 0.3);
+  color: white;
+  border-radius: 9999px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  width: 600px;
+  font-weight: 600;
+  transition: all 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.auth-button:hover {
+  background: linear-gradient(to bottom, #717dff, #4957eb);
+  transform: scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(96, 107, 235, 0.4);
+}
+
+.auth-button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 768px) {
   .auth-button {
-    @apply primary-button py-4 text-3xl w-[600px] max-md:w-full;
+    width: 100%;
   }
+}
 
-  .main-section {
-    @apply flex flex-col items-center gap-8 pt-12 mx-15 pb-5;
-  }
+.main-section {
+  @apply flex flex-col items-center gap-8 pt-12 mx-15 pb-5;
+}
 
-  .page-heading {
-    @apply flex flex-col items-center gap-8 max-w-4xl text-center;
-  }
+.page-heading {
+  @apply flex flex-col items-center gap-8 max-w-4xl text-center;
+}
 
-  .resumes-section {
-    @apply flex flex-wrap max-lg:flex-col gap-6 items-start w-full max-w-[1850px] justify-evenly;
-  }
+.resumes-section {
+  @apply flex flex-wrap max-lg:flex-col gap-6 items-start w-full max-w-[1850px] justify-evenly;
+}
 
-  .resume-card {
-    @apply flex flex-col gap-8 h-[560px] w-full lg:w-[450px] xl:w-[490px] bg-white rounded-2xl p-4;
-  }
+.resume-card {
+  @apply flex flex-col gap-8 h-[560px] w-full lg:w-[450px] xl:w-[490px] bg-white rounded-2xl p-4;
+}
 
-  .resume-card-header {
-    @apply flex flex-row gap-2 justify-between min-h-[110px] max-sm:flex-col items-center max-md:justify-center max-md:items-center;
-  }
+.resume-card-header {
+  @apply flex flex-row gap-2 justify-between min-h-[110px] max-sm:flex-col items-center max-md:justify-center max-md:items-center;
+}
 
-  .feedback-section {
-    @apply flex flex-col gap-8 w-1/2 px-8 max-lg:w-full py-6;
-  }
+.feedback-section {
+  @apply flex flex-col gap-8 w-1/2 px-8 max-lg:w-full py-6;
+}
 
-  .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
-  }
+.navbar {
+  @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
+}
 
-  .score-badge {
-    @apply flex flex-row items-center justify-center py-1 px-2 gap-4 rounded-[96px];
-  }
+.score-badge {
+  @apply flex flex-row items-center justify-center py-1 px-2 gap-4 rounded-[96px];
+}
 
-  .form-div {
-    @apply flex flex-col gap-2 w-full items-start;
-  }
+.form-div {
+  @apply flex flex-col gap-2 w-full items-start;
+}
 
-  .uplader-drag-area {
-    @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-white rounded-2xl min-h-[208px];
-  }
+.uplader-drag-area {
+  @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-white rounded-2xl min-h-[208px];
+}
 
-  .uploader-selected-file {
-    @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
-  }
+.uploader-selected-file {
+  @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
 }
 
 @utility bg-gradient {
