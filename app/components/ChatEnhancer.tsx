@@ -288,10 +288,7 @@ const ChatEnhancer = ({ resumeId, resumeContent, onResumeUpdate }: ChatEnhancerP
                     <button
                         onClick={() => sendMessage(inputValue)}
                         disabled={isStreaming || !inputValue.trim()}
-                        className={`px-4 py-2 rounded-full font-medium transition-all ${isStreaming || !inputValue.trim()
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg'
-                            }`}
+                        className="primary-button !w-12 !h-12 !p-0 !min-h-0"
                     >
                         {isStreaming ? '...' : '→'}
                     </button>

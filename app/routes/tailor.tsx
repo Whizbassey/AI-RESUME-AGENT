@@ -863,10 +863,7 @@ const TailorPage = () => {
                         <button
                             onClick={handleTailor}
                             disabled={isTailoring || !selectedResume || !jobInfo.jobDescription}
-                            className={`w-full py-4 rounded-xl font-semibold text-white transition-all ${isTailoring || !selectedResume || !jobInfo.jobDescription
-                                ? 'bg-gray-400 cursor-not-allowed'
-                                : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl'
-                                }`}
+                            className="primary-button-lg disabled:!bg-gray-400 disabled:cursor-not-allowed"
                         >
                             {isTailoring ? (
                                 <span className="flex items-center justify-center gap-2">
@@ -877,7 +874,7 @@ const TailorPage = () => {
                                     {progress.phase || 'Processing...'}
                                 </span>
                             ) : (
-                                '✨ Tailor Resume'
+                                'Tailor Resume'
                             )}
                         </button>
                     </div>
@@ -973,7 +970,7 @@ const TailorPage = () => {
                                         className="flex flex-col bg-white rounded-2xl shadow-2xl border-2 border-blue-100 overflow-hidden hover:shadow-3xl hover:scale-[1.02] transition-all cursor-pointer text-left h-[400px] group"
                                     >
                                         <div className="px-4 py-3 bg-blue-50 border-b border-blue-100 flex items-center justify-between">
-                                            <span className="text-sm font-bold text-blue-700">Tailored Resume ✨</span>
+                                            <span className="text-sm font-bold text-blue-700">Tailored Resume</span>
                                             <span className="text-xs text-blue-400">Click to view full</span>
                                         </div>
                                         <div className="flex-1 p-6 bg-[url('/images/dots.svg')] bg-repeat overflow-hidden relative">
@@ -1032,7 +1029,7 @@ const TailorPage = () => {
                                         <button
                                             onClick={handleChat}
                                             disabled={isChatting || !chatInput.trim()}
-                                            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
+                                            className="primary-button !w-fit"
                                         >
                                             {isChatting ? (
                                                 <>
@@ -1141,7 +1138,7 @@ const TailorPage = () => {
                             <div>
                                 <h3 className={`text-lg font-bold ${modalType === 'tailored' ? 'text-blue-700' : 'text-gray-700'
                                     }`}>
-                                    {modalType === 'tailored' ? 'Tailored Resume ✨' : 'Original Resume'}
+                                    {modalType === 'tailored' ? 'Tailored Resume' : 'Original Resume'}
                                 </h3>
                                 <p className="text-xs text-gray-500 mt-1">
                                     {modalType === 'tailored' ? 'Latest refined version' : 'Your original resume'}

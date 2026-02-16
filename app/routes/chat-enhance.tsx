@@ -119,7 +119,7 @@ const ChatEnhancePage = () => {
                                 to={`/tailor`}
                                 className="flex-1 py-2 bg-blue-600 text-white rounded-lg font-medium text-center hover:bg-blue-700 transition-colors"
                             >
-                                ✨ Tailor for Job
+                                Tailor for Job
                             </Link>
                             <Link
                                 to={`/resume/${id}`}

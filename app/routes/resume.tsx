@@ -80,26 +80,10 @@ const Resume = () => {
                             <Details feedback={feedback} />
                             <div className="flex flex-wrap justify-center gap-3 mt-4">
                                 <Link
-                                    to={`/enhance/${id}`}
-                                    className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
-                                >
-                                    <span>Enhance Your Resume</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M5 12h14"></path>
-                                        <path d="m12 5 7 7-7 7"></path>
-                                    </svg>
-                                </Link>
-                                <Link
                                     to={`/tailor?resume=${id}`}
-                                    className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2"
+                                    className="primary-button w-fit !px-12 !py-5 !text-xl !font-bold"
                                 >
-                                    <span>✨ Tailor for Job</span>
-                                </Link>
-                                <Link
-                                    to={`/chat-enhance/${id}`}
-                                    className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors flex items-center gap-2"
-                                >
-                                    <span>💬 Chat to Refine</span>
+                                    <span>Tailor for Job</span>
                                 </Link>
                             </div>
                         </div>
@@ -107,8 +91,8 @@ const Resume = () => {
                         <img src="/images/resume-scan-2.gif" className="w-full" />
                     )}
                 </section>
-            </div>
-        </main>
+            </div >
+        </main >
     )
 }
 export default Resume
