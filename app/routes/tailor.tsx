@@ -54,7 +54,7 @@ const AVAILABLE_MODELS: AgentModel[] = [
     { id: 'mistral-large-latest', name: 'Mistral Large', provider: 'Mistral' },
 ];
 
-const DEFAULT_MODEL = 'claude-3-7-sonnet-latest';
+const DEFAULT_MODEL = 'gpt-4o-mini';
 
 export const meta = () => ([
     { title: 'Resumind | Tailor Resume' },
