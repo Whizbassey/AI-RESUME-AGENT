@@ -19,6 +19,25 @@ import { DEFAULT_MODEL } from '~/types/agent';
 const getPuter = (): typeof window.puter | null =>
     typeof window !== "undefined" && window.puter ? window.puter : null;
 
+const callPuterChat = async (
+    puter: typeof window.puter,
+    messages: { role: string; content: string | object[] }[],
+    options?: { model?: string; stream?: boolean }
+): Promise<unknown> => {
+    const chatFn = puter.ai.chat as (...args: unknown[]) => Promise<unknown>;
+
+    try {
+        return await chatFn(messages, options);
+    } catch (error) {
+        const msg =
+            error instanceof Error ? error.message : String(error ?? "");
+        if (msg.toLowerCase().includes("fallback model")) {
+            return chatFn(messages, undefined, false, options);
+        }
+        throw error;
+    }
+};
+
 /**
  * Agent prompts for different tasks
  */
@@ -167,7 +186,7 @@ async function streamingChat(
     let fullResponse = '';
 
     try {
-        const response = await puter.ai.chat(messages as never, {
+        const response = await callPuterChat(puter, messages, {
             model,
             stream: true,
         });
@@ -215,7 +234,7 @@ export async function tailorResume(
 
     // Step 1: Analyze job requirements
     console.log('[tailorResume] Analyzing job with model:', model);
-    const jobAnalysisResponse = await puter.ai.chat([
+    const jobAnalysisResponse = await callPuterChat(puter, [
         { role: 'user', content: PROMPTS.analyzeJob(jobInfo) }
     ], { model });
 
@@ -293,7 +312,7 @@ export async function measureJobFit(
 
     console.log('[measureJobFit] Starting job fit analysis with model:', model);
 
-    const response = await puter.ai.chat([
+    const response = await callPuterChat(puter, [
         { role: 'user', content: PROMPTS.measureFit(resumeContent, jobInfo) }
     ], { model });
 

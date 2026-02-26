@@ -99,6 +99,33 @@ interface PuterStore {
 const getPuter = (): typeof window.puter | null =>
     typeof window !== "undefined" && window.puter ? window.puter : null;
 
+const callPuterChat = async (
+    puter: typeof window.puter,
+    prompt: string | ChatMessage[],
+    options?: PuterChatOptions,
+    imageURL?: string,
+    testMode?: boolean
+): Promise<AIResponse> => {
+    const chatFn = puter.ai.chat as (...args: unknown[]) => Promise<AIResponse>;
+    const shouldUseFourArgs =
+        typeof imageURL === "string" || typeof testMode === "boolean";
+
+    if (shouldUseFourArgs) {
+        return chatFn(prompt, imageURL, testMode, options);
+    }
+
+    try {
+        return await chatFn(prompt, options);
+    } catch (error) {
+        const msg =
+            error instanceof Error ? error.message : String(error ?? "");
+        if (msg.toLowerCase().includes("fallback model")) {
+            return chatFn(prompt, imageURL, testMode, options);
+        }
+        throw error;
+    }
+};
+
 export const usePuterStore = create<PuterStore>((set, get) => {
     const setError = (msg: string) => {
         set({
@@ -321,10 +348,19 @@ export const usePuterStore = create<PuterStore>((set, get) => {
             setError("Puter.js not available");
             return;
         }
-        // return puter.ai.chat(prompt, imageURL, testMode, options);
-        return puter.ai.chat(prompt, imageURL, testMode, options) as Promise<
-            AIResponse | undefined
-        >;
+
+        const resolvedOptions =
+            imageURL && typeof imageURL === "object" ? imageURL : options;
+        const resolvedImageURL =
+            typeof imageURL === "string" ? imageURL : undefined;
+
+        return callPuterChat(
+            puter,
+            prompt,
+            resolvedOptions,
+            resolvedImageURL,
+            testMode
+        ) as Promise<AIResponse | undefined>;
     };
 
     const feedback = async (path: string, message: string) => {
@@ -334,7 +370,8 @@ export const usePuterStore = create<PuterStore>((set, get) => {
             return;
         }
 
-        return puter.ai.chat(
+        return callPuterChat(
+            puter,
             [
                 {
                     role: "user",
